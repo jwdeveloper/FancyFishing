@@ -1,0 +1,8 @@
+name: FancyFishing
+version: ${project.version}
+main: jw.fancy_fishing.Main
+api-version: 1.17
+prefix: x
+authors: [ x ]
+description: x
+website: x
