@@ -8,7 +8,7 @@ public class TestCommand extends FluentCommand
 {
     public TestCommand()
     {
-        super("here is my command");
+        super("testCommand");
     }
 
     @Override
