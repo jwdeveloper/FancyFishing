@@ -5,27 +5,30 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
-
-
-    //PRO TIPS
+    // *File compilation*
+    // after do changes in code use green hammer to rebuild .jar and then
     // use /reload to reload plugin on server
 
-    //HOW TO JUMP INSIDE THE CLASS
-    //to open class definition press CTRL and move cursor over a class for example "TestEvents" and click
+    //method that runs when plugin is loaded
     @Override
     public void onEnable()
     {
         log(ChatColor.GREEN+ "FancyFishing enable");
-        //JUMP TO CLASS DEFINITION
+        //init events
         new TestEvents();
 
-    }
+        //init command
+        new TestCommand();
 
+        //HOW TO JUMP INSIDE THE CLASS
+        //to open class definition press CTRL and move cursor over a class for example "TestEvents" and click
+        //JUMP TO CLASS DEFINITION
+    }
+    //method that runs when plugin is unloaded
     @Override
     public void onDisable() {
         log(ChatColor.RED+ "disable");
     }
-
 
 
     public static Main getPlugin()
