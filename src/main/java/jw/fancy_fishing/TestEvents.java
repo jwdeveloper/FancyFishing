@@ -13,25 +13,25 @@ public class TestEvents extends EventBase {
     //EventHandler is kind of Flag that says to Server  notify this Method when PlayerMoveEvent will be triggered
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        //Main.log("Player is moving ;) " + event.getPlayer().getName());
+        Main.log("Player is moving ;) " + event.getPlayer().getName());
     }
 
     //every event in "Bukkit" server need to have @EventHandler annotation
     @EventHandler
     public void onBlockDestroy(BlockDestroyEvent event) {
 
-    //    Main.log("Block has been destoryed" + event.getBlock());
+        Main.log("Block has been destoryed" + event.getBlock());
     }
 
     //onPluginStart and onPluginStop has    @EventHandler in the parent class
     @Override
     public void onPluginStart(PluginEnableEvent event) {
-        //Main.log("Plugin has been enabled ");
+        Main.log("Plugin has been enabled ");
     }
 
     @Override
     public void onPluginStop(PluginDisableEvent event) {
-        //Main.log("Plugin has been disabled ");
+        Main.log("Plugin has been disabled ");
     }
 
 }

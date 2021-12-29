@@ -13,7 +13,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable()
     {
-        log(ChatColor.GREEN+ "FancyFishing enable");
+        log(ChatColor.GREEN+ "FancyFishing is running 👍.");
         //init events
         new TestEvents();
         new FishEvent();
