@@ -16,9 +16,14 @@ public final class Main extends JavaPlugin {
         log(ChatColor.GREEN+ "FancyFishing enable");
         //init events
         new TestEvents();
+        new FishEvent();
 
         //init command
-        new TestCommand();
+        CommandsProvider commandsProvider = new CommandsProvider();
+        var rootCmd = commandsProvider.rootCommand();
+        var getFishCmd = commandsProvider.getFishCmd();
+        rootCmd.setLogs(true);
+        rootCmd.addSubCommand(getFishCmd);
 
         //HOW TO JUMP INSIDE THE CLASS
         //to open class definition press CTRL and move cursor over a class for example "TestEvents" and click

@@ -1,4 +1,4 @@
-package jw.external_modules.events;
+package jw.external.jw_modules.events;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -8,25 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class FluentEvent<T extends Event> {
+public class SimpleEvent<T extends Event> {
     private final Consumer<T> onEvent;
     private final List<Consumer<T>> nextActions;
     private Consumer<Exception> onError;
     private boolean isActive;
     private String permission;
 
-    public FluentEvent(Consumer<T> onEvent) {
+    public SimpleEvent(Consumer<T> onEvent) {
         this.onEvent = onEvent;
         this.nextActions = new ArrayList<>();
         this.isActive = true;
     }
 
-    public FluentEvent<T> setPermission(String permission) {
+    public SimpleEvent<T> setPermission(String permission) {
         this.permission = permission;
         return this;
     }
 
-    public FluentEvent<T> setActive(boolean isActive) {
+    public SimpleEvent<T> setActive(boolean isActive) {
         this.isActive = isActive;
         return this;
     }
@@ -58,12 +58,12 @@ public class FluentEvent<T extends Event> {
         }
     }
 
-    public FluentEvent<T> onError(Consumer<Exception> onError) {
+    public SimpleEvent<T> onError(Consumer<Exception> onError) {
         this.onError = onError;
         return this;
     }
 
-    public FluentEvent<T> andThen(Consumer<T> action) {
+    public SimpleEvent<T> andThen(Consumer<T> action) {
         nextActions.add(action);
         return this;
     }

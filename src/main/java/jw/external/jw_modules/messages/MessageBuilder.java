@@ -1,4 +1,4 @@
-package jw.external_modules.messages;
+package jw.external.jw_modules.messages;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import java.util.ArrayList;

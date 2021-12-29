@@ -1,4 +1,4 @@
-package jw.external_modules.events;
+package jw.external.jw_modules.events;
 
 import jw.fancy_fishing.Main;
 import org.bukkit.Bukkit;
