@@ -4,14 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
-public class Fisherman {
-    public int PlayerID;
-    public Date FishStartTime;
-
-    public Fisherman () {
-
-    }
+public class Fisherman
+{
+    private UUID playerId;
+    private Date fishStartTime;
 }

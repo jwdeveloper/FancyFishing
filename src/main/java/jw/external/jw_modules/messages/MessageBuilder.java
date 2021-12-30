@@ -28,6 +28,11 @@ public class MessageBuilder {
         return this;
     }
 
+    public MessageBuilder format(String pattern, Object message)
+    {
+        return text(String.format(pattern, message));
+    }
+
     public MessageBuilder addList(ArrayList<String> name) {
         for (var value : name)
         {

@@ -6,12 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomFish {
-
-    public FishData fishData;
-
-    public CustomFish () {
-
-    }
-
+public class CustomFish
+{
+    private FishData fishData;
 }

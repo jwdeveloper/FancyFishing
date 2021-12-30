@@ -1,13 +1,21 @@
 package jw.fancy_fishing;
 
 import jw.external.jw_modules.events.EventBase;
-import jw.external.jw_modules.messages.FluentMessage;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
+import java.util.HashMap;
 
-public class FishEvent extends EventBase {
+public class FishingEventHandler extends EventBase {
+
+
+
+    public FishingEventHandler()
+    {
+
+    }
 
     @Override
     public void onPluginStart(PluginEnableEvent event) {
@@ -20,14 +28,14 @@ public class FishEvent extends EventBase {
     }
 
     @EventHandler
-    public void onPlayerFishing(PlayerFishEvent event) {
-     var msg=   FluentMessage.create().text("Player")
-                .space()
-                .text(event.getPlayer().name())
-                .space()
-                .text("is fishing")
-                .text(event.getState().name()).get();
-     event.getPlayer().sendMessage(msg);
+    public void onPlayerFishing(PlayerFishEvent event)
+    {
+
+        switch (event.getState())
+        {
+
+        }
+
     }
 
 }
