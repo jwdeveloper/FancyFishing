@@ -10,6 +10,6 @@ import java.util.UUID;
 @Setter
 public class Fisherman
 {
-    private UUID playerId;
+    private UUID playerUUID;
     private Date fishStartTime;
 }

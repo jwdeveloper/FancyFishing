@@ -14,31 +14,34 @@ public class CommandsProvider {
 
     public SimpleCommand rootCommand()
     {
-       return SimpleCommand.newCommand("fish")
+       return SimpleCommand.newCommand("fancy_fishing")
                 .register();
     }
 
+    //to do
     public SimpleCommand getFishCmd() {
-       return SimpleCommand.newCommand("get")
+       return SimpleCommand.newCommand("get_fish")
                 .newArgument("type")
-                .addValidator(new EnumValidator(FishType.class))
-                .setTabComplete(Arrays.stream(FishType.values()).map(c -> c.name()).toList())
                 .setDisplayMode(ArgumentDisplayMode.TAB_COMPLETE)
                 .build()
                 .onExecute(event ->
                 {
-                    Player player = (Player) event.getSender();
-                    String selectedType = (String)event.getValues()[0];
-                    FishType type =  FishType.valueOf(selectedType);
-                    String message = FluentMessage.create()
-                            .color(ChatColor.GREEN)
-                            .space()
-                            .text(type.name())
-                            .get();
-                    player.sendMessage(message);
+
                 })
                 .build();
     }
 
+    //to do
+    public SimpleCommand getFishingRodCmd() {
+        return SimpleCommand.newCommand("get_fishingrod")
+                .newArgument("type")
+                .setDisplayMode(ArgumentDisplayMode.TAB_COMPLETE)
+                .build()
+                .onExecute(event ->
+                {
+
+                })
+                .build();
+    }
 
 }
