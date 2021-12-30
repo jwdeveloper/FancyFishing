@@ -1,8 +1,11 @@
 package jw.external.jw_modules.builders;
+import jw.external.jw_modules.item_stack_data.ItemStackDataFormatter;
+import jw.fancy_fishing.Main;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 public class ItemStackBuilder {
@@ -52,6 +55,13 @@ public class ItemStackBuilder {
 
     public ItemStackBuilder withAmount(int amount) {
         itemStack.setAmount(amount);
+        return this;
+    }
+
+    //put serializable object inside ItemStack as byte array
+    public  <T extends Serializable> ItemStackBuilder withIncludedObject(T _object)
+    {
+        ItemStackDataFormatter.saveData(Main.getPlugin(),_object,itemStack);
         return this;
     }
 

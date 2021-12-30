@@ -1,13 +1,15 @@
 package jw.fancy_fishing;
 
+import jw.fancy_fishing.listeners.FishingListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 //fancy_fishing.data   - DTO
 //fancy_fishing.model  - object uses by managers and events
+//fancy_fishing.listeners  - bukkit event handles
 //fancy_fishing.utilities - just utilities and tools
+///fancy_fishing.factories - factories of itemstack Fish/Fishing rod
 
 public final class Main extends JavaPlugin
 {
@@ -47,6 +49,6 @@ public final class Main extends JavaPlugin
 
     private void initEvents()
     {
-        new FishingEventHandler();
+        new FishingListener();
     }
 }

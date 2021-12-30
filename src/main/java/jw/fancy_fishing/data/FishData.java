@@ -8,11 +8,13 @@ import jw.fancy_fishing.utilities.FishMessages;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
-public class FishData
+public class FishData implements Serializable
 {
     private FishRarity rarity = FishRarity.COMMON;
     private FishQuantity quality = FishQuantity.UNKNOWN;
@@ -20,11 +22,12 @@ public class FishData
     private String name;
     private String description;
 
+    private int customDataModelId;
     private int healthPoints;
     private int mass;
 
-    public ArrayList effects;
-    public ArrayList biomes;
+    private List effects;
+    private List biomes;
 
     public String getLore()
     {

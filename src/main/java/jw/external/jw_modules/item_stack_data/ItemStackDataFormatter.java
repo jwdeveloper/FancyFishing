@@ -1,55 +1,79 @@
 package jw.external.jw_modules.item_stack_data;
 
 import jw.fancy_fishing.Main;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.tags.ItemTagType;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
+import java.io.Serializable;
 
 public class ItemStackDataFormatter
 {
-    public static <T> T getData(Class<T> _class, ItemStack itemStack)
+
+    public static <T extends Serializable> T getData(JavaPlugin plugin,Class<T> _class, ItemStack itemStack)
     {
-        NamespacedKey key = new NamespacedKey(Main.getPlugin(), "our-custom-key");
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.getCustomTagContainer().setCustomTag(key, ItemTagType.DOUBLE, Math.PI);
-        itemStack.setItemMeta(itemMeta);
-
-        var result = new Object();
-        return (T)result;
-    }
-
-    public static Object getData(Class<?> _class,String fieldName, ItemStack itemStack)
-    {
-
-     //   var itemMeta = itemStack.getItemMeta();
-       // var tagContainer = itemMeta.getPersistentDataContainer();
-
-
-        ItemStack item = new ItemStack(Material.DIRT);
-        var itemMeta = item.getItemMeta();
-        var key = new NamespacedKey(Main.getPlugin(), "My float");
-        itemMeta.getCustomTagContainer().setCustomTag(key, ItemTagType.FLOAT, 34445f);
-
-        itemStack.setItemMeta(itemMeta);
-
-        var result = new Object();
-        return result;
-    }
-
-    public static <T> void saveData(T _object, ItemStack itemStack) throws IllegalAccessException {
-        var _class = _object.getClass();
-        var _className = _class.getName();
-        var fieldsData = new HashMap<String, Object>();
-        for(var field: _class.getDeclaredFields())
-        {
-            fieldsData.put(_className+"."+field.getName(),field.get(_object));
+        try {
+            var key = new NamespacedKey(plugin, _class.getSimpleName());
+            var itemMeta = itemStack.getItemMeta();
+            var tagContainer = itemMeta.getPersistentDataContainer();
+            var bytes =  tagContainer.getOrDefault(key,PersistentDataType.BYTE_ARRAY,null);
+            if(bytes == null)
+                return null;
+            var mapper = new SerlializedMapper<T>();
+            return mapper.fromBytes(bytes);
         }
-        var key = new NamespacedKey(Main.getPlugin(), _class.getName());
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static <T extends Serializable> T getData(Class<T> _class, ItemStack itemStack)
+    {
+        return getData(Main.getPlugin(),_class,itemStack);
+    }
+
+    public static <T extends Serializable> boolean saveData(JavaPlugin javaPlugin, T _object, ItemStack itemStack)
+    {
+        try {
+            var key = new NamespacedKey(javaPlugin, _object.getClass().getSimpleName());
+            var itemMeta = itemStack.getItemMeta();
+            var tagContainer = itemMeta.getPersistentDataContainer();
+            if(tagContainer.has(key,PersistentDataType.BYTE_ARRAY))
+            {
+                tagContainer.remove(key);
+            }
+
+            var mapper = new SerlializedMapper<T>();
+            var bytes = mapper.toBytes(_object);
+            tagContainer.set(key,PersistentDataType.BYTE_ARRAY,bytes);
+            itemStack.setItemMeta(itemMeta);
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static <T extends Serializable> boolean saveData(T _object, ItemStack itemStack)
+    {
+        return saveData(Main.getPlugin(), _object,  itemStack);
+    }
+
+    public static <T extends Serializable> boolean containsObject(JavaPlugin plugin,Class<T> _class, ItemStack itemStack)
+    {
+        var key = new NamespacedKey(plugin, _class.getClass().getSimpleName());
         var itemMeta = itemStack.getItemMeta();
         var tagContainer = itemMeta.getPersistentDataContainer();
+        return tagContainer.has(key,PersistentDataType.BYTE_ARRAY);
+    }
+
+    public static <T extends Serializable> boolean containsObject(Class<T> _class, ItemStack itemStack)
+    {
+        return containsObject(Main.getPlugin(),_class,itemStack);
     }
 }

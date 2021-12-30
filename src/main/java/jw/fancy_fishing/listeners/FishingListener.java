@@ -1,23 +1,20 @@
-package jw.fancy_fishing;
+package jw.fancy_fishing.listeners;
 
 import jw.external.jw_modules.events.EventBase;
 import jw.external.jw_modules.messages.FluentMessage;
-import jw.fancy_fishing.model.Fisherman;
+import jw.fancy_fishing.models.FisherModel;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.event.server.PluginEnableEvent;
+
 import java.util.HashMap;
 import java.util.UUID;
 
-public class FishingEventHandler extends EventBase {
+public class FishingListener extends EventBase {
 
+    private final HashMap<UUID, FisherModel> fishermans;
 
-    private final HashMap<UUID, Fisherman> fishermans;
-
-    public FishingEventHandler()
+    public FishingListener()
     {
         fishermans = new HashMap<>();
     }
@@ -47,7 +44,7 @@ public class FishingEventHandler extends EventBase {
         var startFishing = true;
         if(startFishing)
         {
-            fishermans.put(player.getUniqueId(),new Fisherman(player));
+            fishermans.put(player.getUniqueId(),new FisherModel(player));
         }
         else
         {
