@@ -1,7 +1,5 @@
-name: ${project.name}
+name: FancyFishing
 version: ${project.version}
 main: jw.fancy_fishing.Main
 api-version: ${minecraft.version}
-prefix: x
 authors: [ jw,majorh5 ]
-description: x

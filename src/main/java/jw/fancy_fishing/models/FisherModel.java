@@ -1,10 +1,17 @@
 package jw.fancy_fishing.models;
 
+import jw.external.jw_modules.messages.FluentMessage;
+import jw.fancy_fishing.Main;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerFishEvent;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,16 +33,21 @@ public class FisherModel
         return  0;
     }
 
+    public void onFishingStarted(PlayerFishEvent event)
+    {
+        Main.log("Looking hok");
+        var location = event.getHook().getLocation();
 
-    public void onFishHooked()
+        Main.log("hook found"+ location.toString());
+    }
+
+    public void onFishHooked(PlayerFishEvent event)
     {
 
     }
 
-    public void onFishPull()
+    public void onFishingEnded(PlayerFishEvent event)
     {
 
     }
-
-
 }

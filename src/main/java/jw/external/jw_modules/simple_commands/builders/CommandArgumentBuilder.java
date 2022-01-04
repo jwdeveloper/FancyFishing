@@ -6,6 +6,7 @@ import jw.external.jw_modules.simple_commands.models.CommandArgument;
 import jw.external.jw_modules.simple_commands.validators.*;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,6 +61,17 @@ public class CommandArgumentBuilder {
     public CommandArgumentBuilder setTabComplete(List<String> tabComplete) {
         argument.setTabCompleter(tabComplete);
         return this;
+    }
+
+
+    public <T extends Enum<T>> CommandArgumentBuilder setTabCompleteEnumValues(Class<T> enumClass)
+    {
+        List<String> result = new ArrayList<String>();
+        for (T option : enumClass.getEnumConstants())
+        {
+            result.add(option.name());
+        }
+        return setTabComplete(result);
     }
 
     public CommandArgumentBuilder addTabComplete(String tabComplete) {

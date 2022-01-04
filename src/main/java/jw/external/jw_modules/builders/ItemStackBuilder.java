@@ -12,7 +12,6 @@ public class ItemStackBuilder {
     private final ItemStack itemStack;
 
     public ItemStackBuilder() {
-        Material type;
         itemStack = new ItemStack(Material.DIRT);
     }
 
@@ -23,7 +22,7 @@ public class ItemStackBuilder {
     public ItemStackBuilder withName(String name) {
         itemStack.editMeta(itemMeta ->
         {
-            itemMeta.displayName();
+            itemMeta.setDisplayName(name);
         });
         return this;
     }

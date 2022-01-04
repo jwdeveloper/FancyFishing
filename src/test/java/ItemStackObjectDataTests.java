@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.io.Serializable;
 
-public class ItemStackDataFormatterTests {
+public class ItemStackObjectDataTests {
     private JavaPlugin javaPlugin;
     private ItemStack itemStack;
     private TestData testData;
@@ -19,7 +19,7 @@ public class ItemStackDataFormatterTests {
     @Before
     public void init() {
         MockBukkit.mock();
-        javaPlugin =MockBukkit.createMockPlugin("test_plugin");
+        javaPlugin =MockBukkit.createMockPlugin("test");
         itemStack = new ItemStack(Material.DIRT);
         testData = new TestData();
     }

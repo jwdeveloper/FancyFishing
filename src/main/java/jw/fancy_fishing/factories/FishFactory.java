@@ -10,9 +10,11 @@ public class FishFactory
 {
     public static ItemStack getFish(FishSpice fishSpecie)
     {
-        switch (fishSpecie)
+        switch(fishSpecie)
         {
-            case CARP -> getCarp();
+            case CARP -> {
+                return getCarp();
+            }
         }
         return null;
     }

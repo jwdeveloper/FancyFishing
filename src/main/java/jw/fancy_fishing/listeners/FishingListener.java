@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 
 public class FishingListener extends EventBase {
@@ -31,24 +32,44 @@ public class FishingListener extends EventBase {
                 .toString();
 
         event.getPlayer().sendMessage(message);
-
-        //to do
-        // check name of the state when player starts fishing
-        // check name of the state when player ends fishing
-        //check on what conditions other states are tirgered
-        // if starts add player to fishermans
-        // if ends remove player from fishermans
-
         var player = event.getPlayer();
         var state = event.getState();
-        var startFishing = true;
-        if(startFishing)
+
+
+
+        switch (state)
         {
-            fishermans.put(player.getUniqueId(),new FisherModel(player));
+            case FISHING ->
+                    {
+                        var fisher = new FisherModel(player);
+                        fisher.onFishingStarted(event);
+                        fishermans.putIfAbsent(player.getUniqueId(),fisher);
+                    }
+            case REEL_IN ->
+                    {
+                        var fisherOptional = getFisher(player.getUniqueId());
+                        if(fisherOptional.isEmpty())
+                            return;
+                        fisherOptional.get().onFishingEnded(event);
+                        fishermans.remove(player.getUniqueId());
+                    }
+            case BITE ->
+                    {
+                        var fisherOptional = getFisher(player.getUniqueId());
+                        if(fisherOptional.isEmpty())
+                            return;
+                        fisherOptional.get().onFishHooked(event);
+                    }
         }
-        else
+    }
+
+
+    private Optional<FisherModel> getFisher(UUID uuid)
+    {
+        if(!fishermans.containsKey(uuid))
         {
-          fishermans.remove(player.getUniqueId());
+           return  Optional.empty();
         }
+        return Optional.of(fishermans.get(uuid));
     }
 }

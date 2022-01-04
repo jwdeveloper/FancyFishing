@@ -19,7 +19,7 @@ public class CommandArgument
 
     private ArgumentType type = ArgumentType.TEXT;
 
-    private ArgumentDisplayMode argumentDisplayMode = ArgumentDisplayMode.TYPE;
+    private ArgumentDisplayMode argumentDisplayMode = ArgumentDisplayMode.TAB_COMPLETE;
 
     private List<CommandArgumentValidator> validators = new ArrayList<>();
 

@@ -26,14 +26,14 @@ public final class Main extends JavaPlugin
     @Override
     public void onEnable()
     {
-        log(ChatColor.YELLOW+ "FancyFishing is running 👍");
+        log(ChatColor.GREEN+ "FancyFishing is running 👍");
         initCommands();
         initEvents();
     }
 
     @Override
     public void onDisable() {
-        log(ChatColor.YELLOW+ "FancyFishing disable");
+        log(ChatColor.GREEN+ "FancyFishing disable");
     }
 
     private void initCommands()

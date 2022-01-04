@@ -141,7 +141,8 @@ public class SimpleCommand extends Command {
         }
 
         try {
-            var values = commandService.getArgumentValues(commandArgs, commandModel.getArguments());
+            //var values = commandService.getArgumentValues(commandArgs, commandModel.getArguments());
+            Object[] values = null;
             var eventDto = new SimpleCommandEvent(sender, commandArgs, args, values, true);
             var eventsToInvoke = commandService.getEventsToInvoke(sender, events);
             for (var event : eventsToInvoke) {

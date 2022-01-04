@@ -40,8 +40,7 @@ public class FishData implements Serializable
                 .newLine()
                 .format(FishMessages.FISH_QUALITY, quality.name().toLowerCase())
                 .newLine()
-                .format(FishMessages.FISH_MASS, mass)
-                .toString();
+                .format(FishMessages.FISH_MASS, mass).toString();
     }
 
 }
